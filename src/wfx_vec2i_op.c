@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wfx_vec2i.c                                        :+:      :+:    :+:   */
+/*   wfx_vec2i_op.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/15 21:29:19 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/16 11:54:07 by wseegers         ###   ########.fr       */
+/*   Created: 2018/07/16 11:12:48 by wseegers          #+#    #+#             */
+/*   Updated: 2018/07/16 11:16:52 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
 
-t_vec2i		*vec2i_create()
+void		vec2i_add(t_vec2i *v1, t_vec2i *v2)
 {
-	return (f_memalloc(sizeof(t_vec2i)));
+    v1->x += v2->x;
+    v1->y += v2->y;
 }
 
-void		vec2i_init(t_vec2i *v2, int x, int y)
+void		vec2i_sub(t_vec2i *v1, t_vec2i *v2)
 {
-	v2->x = x;
-	v2->y = y;
+    v1->x -= v2->x;
+    v1->y -= v2->y;
 }
 
-t_vec2i		*vec2i_copy(t_vec2i *v)
+void		vec2i_scale(t_vec2i *v1, int scalar)
 {
-	t_vec2i	*ret;
-
-	ret = vec2i_create();
-	vec2i_init(ret, v->x, v->y);
-	return (ret);
+    v1->x *= scalar;
+    v1->y *= scalar;
 }
+

@@ -12,9 +12,6 @@
 
 #include "libwtcfx.h"
 
-//TODO: remove debug
-#include <stdio.h>
-
 void		wfx_blit(t_mlx mlx, t_window *window)
 {
 	double frame_dif;
@@ -23,17 +20,12 @@ void		wfx_blit(t_mlx mlx, t_window *window)
 	window->frame_count++;
 	f_swapptr((void**)&window->front, (void**)&window->back);
 	frame_dif =  (double)(clock() - window->last_blit) / CLOCKS_PER_SEC;
-	if (frame_dif < 0.0166666666666666667)
+	if (frame_dif < 1.0 / MAX_FPS)
 	{
 		wait.tv_sec = 0;
-		wait.tv_nsec = (long)((0.0166666666666666667 - frame_dif) * 1000000000);
+		wait.tv_nsec = (long)((1.0 / MAX_FPS - frame_dif) * 1000000000L);
 		nanosleep(&wait, NULL);
 	}
 	mlx_put_image_to_window(mlx, window->ptr, window->front->ptr, 0, 0);
 	window->last_blit = clock();
-	if (!(window->frame_count % 100))
-	{
-		printf("frames: %lu   fps: %f\n",window->frame_count, 1 / (((double)(clock() - window->last_fps) / 100) / CLOCKS_PER_SEC));
-		window->last_fps = clock();
-	}
 }

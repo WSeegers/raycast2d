@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wfx_vec2i.c                                        :+:      :+:    :+:   */
+/*   wfx_vec2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 21:29:19 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/16 11:54:07 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/16 12:43:49 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
 
-t_vec2i		*vec2i_create()
+t_vec2		*vec2_create()
 {
-	return (f_memalloc(sizeof(t_vec2i)));
+	return (f_memalloc(sizeof(t_vec2)));
 }
 
-void		vec2i_init(t_vec2i *v2, int x, int y)
+void		vec2_init(t_vec2 *v2, double x, double y)
 {
 	v2->x = x;
 	v2->y = y;
 }
 
-t_vec2i		*vec2i_copy(t_vec2i *v)
+t_vec2		*vec2_copy(t_vec2 *v)
 {
-	t_vec2i	*ret;
+	t_vec2	*ret;
 
-	ret = vec2i_create();
-	vec2i_init(ret, v->x, v->y);
+	ret = vec2_create();
+	vec2_init(ret, v->x, v->y);
 	return (ret);
 }

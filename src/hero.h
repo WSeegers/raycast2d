@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wfx_vec2i.c                                        :+:      :+:    :+:   */
+/*   hero.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/15 21:29:19 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/16 11:54:07 by wseegers         ###   ########.fr       */
+/*   Created: 2018/07/16 12:45:15 by wseegers          #+#    #+#             */
+/*   Updated: 2018/07/16 12:57:43 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libwtcfx.h"
+#ifndef HERO_H
+# define HERO_H
 
-t_vec2i		*vec2i_create()
+# include "libwtcfx.h"
+
+typedef struct	s_hero
 {
-	return (f_memalloc(sizeof(t_vec2i)));
-}
+    t_vec2	pos;
+	t_vec2	vel;
+}               t_hero;
 
-void		vec2i_init(t_vec2i *v2, int x, int y)
-{
-	v2->x = x;
-	v2->y = y;
-}
-
-t_vec2i		*vec2i_copy(t_vec2i *v)
-{
-	t_vec2i	*ret;
-
-	ret = vec2i_create();
-	vec2i_init(ret, v->x, v->y);
-	return (ret);
-}
+#endif

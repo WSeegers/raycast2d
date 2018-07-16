@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wfx_vec2i.c                                        :+:      :+:    :+:   */
+/*   hero.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/15 21:29:19 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/16 11:54:07 by wseegers         ###   ########.fr       */
+/*   Created: 2018/07/16 12:36:11 by wseegers          #+#    #+#             */
+/*   Updated: 2018/07/16 13:06:55 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
+#include "hero.h"
 
-t_vec2i		*vec2i_create()
+void	draw_hero(t_window window, t_hero *hero)
 {
-	return (f_memalloc(sizeof(t_vec2i)));
-}
-
-void		vec2i_init(t_vec2i *v2, int x, int y)
-{
-	v2->x = x;
-	v2->y = y;
-}
-
-t_vec2i		*vec2i_copy(t_vec2i *v)
-{
-	t_vec2i	*ret;
-
-	ret = vec2i_create();
-	vec2i_init(ret, v->x, v->y);
-	return (ret);
+	
 }

@@ -12,7 +12,8 @@
 
 NAME = ray2d
 CC = clang
-CFLAGS = -Werror -Wall -Wextra 
+#CFLAGS = -Werror -Wall -Wextra 
+CFLAGS =
 INC = -I toolkit-wtc/include -I include
 LIB = toolkit-wtc/toolkit-wtc.a
 

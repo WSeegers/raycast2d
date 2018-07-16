@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/15 22:23:00 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/16 13:15:49 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,9 @@ int		draw(void *p)
 	env = (t_env*)p;
 	offset = (offset + 1) % (HEIGHT / 2);
 	wfx_clear_window(env->window);
-	for (int y = 0; y < 50; y++)
-		for (int x = 0; x < 50; x++)
-		{
-			wfx_set_pixel(env->window, x + offset, y + offset, 0x00ffffff);
-		}
-	wfx_line(env->window, &NEW_VEC2I(0, 0), &NEW_VEC2I(420, 350), 0x00ffff00);
+	wfx_grid(env->window, &VEC2I(10, 10), 5, 6, 50);
+	wfx_circle(env->window, &VEC2I(70, 100), 50, 0x00ffffff);
+	//wfx_line(env->window, &VEC2I(0, 0), &VEC2I(420, 350), 0x00ffff00);
 	wfx_blit(env->mlx, env->window);
 	return (0);
 }
@@ -61,6 +58,6 @@ int		main(void)
 	env.mlx = mlx;
 	env.window = &window;
 	mlx_loop_hook(mlx, draw, &env);
-	mlx_key_hook(mlx, key_hook, &env);
+	mlx_key_hook(window.ptr, key_hook, &env);
 	mlx_loop(mlx);
 }
