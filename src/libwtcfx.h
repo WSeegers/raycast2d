@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:47:21 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/16 13:14:39 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/17 07:35:53 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void		wfx_clear_window(t_window *window);
 void		wfx_line(t_window *window, t_vec2i *p1, t_vec2i *p2, int colour);
 void		wfx_rect(t_window *window, t_vec2i *p1, t_vec2i *p2, int colour, bool fill);
 void		wfx_circle(t_window *window, t_vec2i *v, int radius, int colour);
+void		wfx_fcircle(t_window *window, t_vec2i *v, int radius, int colour);
 void		wfx_grid(t_window *window, t_vec2i *origin, int rows, int cols, int size);
+
 
 #endif
