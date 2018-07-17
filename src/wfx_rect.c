@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 11:22:11 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/16 11:58:10 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/17 18:05:01 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void		wfx_rect(t_window *window, t_vec2i *p1, t_vec2i *p2, int colour, bool fill
         start.y = MIN(p1->y, p2->y);
         end.y = MAX(p1->y, p2->y);
         count.y = start.y;
-        while (count.y < end.y && (count.x = start.x))
+        while (count.y < end.y)
         {
+			count.x = start.x;
             while (count.x < end.x)
                 wfx_set_pixel(window, count.x++, count.y, colour);
             count.y++;

@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wfx_vec2i_op.c                                     :+:      :+:    :+:   */
+/*   wfx_dda.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/16 11:12:48 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/17 15:50:45 by wseegers         ###   ########.fr       */
+/*   Created: 2018/07/18 00:44:01 by wseegers          #+#    #+#             */
+/*   Updated: 2018/07/18 00:45:50 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libwtcfx.h"
+#ifndef WFX_DDA
+# define WFX_DDA
 
-t_vec2i		vec2i_add(t_vec2i v1, t_vec2i v2)
+# include "libwtcfx.h"
+
+typedef struct	s_hit_report
 {
-	return (VEC2I(v1.x + v2.x, v1.y + v2.y));
-}
+	double	hit_dist;
+	int		value;
+	int		boundry;
+}				t_hit_report;
 
-t_vec2i		vec2i_sub(t_vec2i v1, t_vec2i v2)
+typedef struct	s_dda
 {
-    return (VEC2I(v1.x - v2.x, v1.y - v2.y));
-}
+	t_vec2	d;
+	t_vec2	side;
+	t_vec2i cell;
+	t_vec2i hitx;
+	t_vec2i hity;
+	t_vec2i	step;
+	int		yhit;
+	double 	hitdist;
+}				t_dda;
 
-t_vec2i		vec2i_scale(t_vec2i v1, int scalar)
-{
-	return (VEC2I(v1.x * scalar, v1.y * scalar));
-}
+double		wfx_dda(t_vec2 start, t_vec2 direction, t_grid map);
 
+#endif

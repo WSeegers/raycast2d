@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wfx_window.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 19:04:09 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/15 22:08:28 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/17 14:56:49 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		wfx_init_window(t_window *window, int width, int height, char *title)
 	window->back = wfx_create_image();
 	wfx_init_image(window->back, width, height);
 	window->frame_count = 0;
+	//wfx_loop_hook(window, wfx_std_loop, window->param);
 }
 
 void		wfx_destroy_window(t_window *window)

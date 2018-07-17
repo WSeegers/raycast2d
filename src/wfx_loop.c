@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wfx_vec2i_op.c                                     :+:      :+:    :+:   */
+/*   wfx_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/16 11:12:48 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/17 15:50:45 by wseegers         ###   ########.fr       */
+/*   Created: 2018/07/17 14:34:53 by wseegers          #+#    #+#             */
+/*   Updated: 2018/07/17 15:05:12 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
 
-t_vec2i		vec2i_add(t_vec2i v1, t_vec2i v2)
+int		wfx_std_loop(t_window *window)
 {
-	return (VEC2I(v1.x + v2.x, v1.y + v2.y));
+	window->update(window->param);
+	window->draw(window->param);
+	wfx_blit(window);
+	return (0);
 }
 
-t_vec2i		vec2i_sub(t_vec2i v1, t_vec2i v2)
+void	wfx_loop_hook(t_window *window, int (*f)(void*), void *param)
 {
-    return (VEC2I(v1.x - v2.x, v1.y - v2.y));
+	mlx_loop_hook(window->mlx, f, param);
 }
 
-t_vec2i		vec2i_scale(t_vec2i v1, int scalar)
+void	wfx_start(t_window *window)
 {
-	return (VEC2I(v1.x * scalar, v1.y * scalar));
+	mlx_loop(window->mlx);
 }
-

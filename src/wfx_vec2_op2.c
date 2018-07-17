@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wfx_vec2i_op.c                                     :+:      :+:    :+:   */
+/*   wfx_vec2_op2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/16 11:12:48 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/17 15:50:45 by wseegers         ###   ########.fr       */
+/*   Created: 2018/07/17 09:19:58 by wseegers          #+#    #+#             */
+/*   Updated: 2018/07/17 20:46:39 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
 
-t_vec2i		vec2i_add(t_vec2i v1, t_vec2i v2)
+t_vec2	vec2_rotate(t_vec2 v, double rad)
 {
-	return (VEC2I(v1.x + v2.x, v1.y + v2.y));
+	double s;
+	double c;
+
+	c = cos(rad);
+	s = sin(rad);
+	return (VEC2(v.x * c + v.y * -s, v.x * s + v.y * c));
 }
 
-t_vec2i		vec2i_sub(t_vec2i v1, t_vec2i v2)
+t_vec2		vec2_at_len(t_vec2 v, double size)
 {
-    return (VEC2I(v1.x - v2.x, v1.y - v2.y));
+	return (vec2_scale(vec2_norm(v), size));
 }
 
-t_vec2i		vec2i_scale(t_vec2i v1, int scalar)
+double		vec2_angle(t_vec2 v)
 {
-	return (VEC2I(v1.x * scalar, v1.y * scalar));
+	return(atan(v.y / v.x));
 }
-
