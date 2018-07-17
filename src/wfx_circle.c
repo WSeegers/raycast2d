@@ -6,41 +6,86 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 13:07:22 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/16 13:14:25 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/17 07:44:09 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
 
-void wfx_circle(t_window *window, t_vec2i *v, int radius, int colour)
+static void	set_oct(t_window *window, t_vec2i *v, t_vec2i offs, int colour)
 {
-    int x = radius-1;
-    int y = 0;
-    int dx = 1;
-    int dy = 1;
-    int err = dx - (radius << 1);
+	wfx_set_pixel(window, v->x + offs.x, v->y + offs.y, colour);
+	wfx_set_pixel(window, v->x - offs.x, v->y + offs.y, colour);
+	wfx_set_pixel(window, v->x + offs.y, v->y + offs.x, colour);
+	wfx_set_pixel(window, v->x - offs.y, v->y + offs.x, colour);
+	wfx_set_pixel(window, v->x - offs.y, v->y - offs.x, colour);
+	wfx_set_pixel(window, v->x + offs.y, v->y - offs.x, colour);
+	wfx_set_pixel(window, v->x + offs.x, v->y - offs.y, colour);
+	wfx_set_pixel(window, v->x - offs.x, v->y - offs.y, colour);
+}
 
-    while (x >= y)
-    {
-        wfx_set_pixel(window, v->x + x, v->y + y, colour);
-        wfx_set_pixel(window, v->x + y, v->y + x, colour);
-        wfx_set_pixel(window, v->x - y, v->y + x, colour);
-        wfx_set_pixel(window, v->x - x, v->y + y, colour);
-        wfx_set_pixel(window, v->x - x, v->y - y, colour);
-        wfx_set_pixel(window, v->x - y, v->y - x, colour);
-        wfx_set_pixel(window, v->x + y, v->y - x, colour);
-        wfx_set_pixel(window, v->x + x, v->y - y, colour);
-        if (err <= 0)
-        {
-            y++;
-            err += dy;
-            dy += 2;
-        }
-        if (err > 0)
-        {
-            x--;
-            dx += 2;
-            err += dx - (radius << 1);
-        }
-    }
+void		wfx_circle(t_window *window, t_vec2i *v, int radius, int colour)
+{
+	t_vec2i p;
+	t_vec2i	d;
+	int		err;
+
+	p.x = radius - 1;
+	p.y = 0;
+	d.x = 1;
+	d.y = 1;
+	err = d.x - (radius << 1);
+	while (p.x >= p.y)
+	{
+		set_oct(window, v, p, colour);
+		if (err <= 0)
+		{
+			p.y++;
+			err += d.y;
+			d.y += 2;
+			continue;
+		}
+		p.x--;
+		d.x += 2;
+		err += d.x - (radius << 1);
+	}
+}
+
+static void	fill_oct(t_window *window, t_vec2i *v, t_vec2i offs, int colour)
+{
+	wfx_line(window, &VEC2I(v->x + offs.x, v->y + offs.y),
+				&VEC2I(v->x - offs.x, v->y + offs.y), colour);
+	wfx_line(window, &VEC2I(v->x + offs.y, v->y + offs.x),
+				&VEC2I(v->x - offs.y, v->y + offs.x), colour);
+	wfx_line(window, &VEC2I(v->x - offs.y, v->y - offs.x),
+				&VEC2I(v->x + offs.y, v->y - offs.x), colour);
+	wfx_line(window, &VEC2I(v->x + offs.x, v->y - offs.y),
+				&VEC2I(v->x - offs.x, v->y - offs.y), colour);
+}
+
+void		wfx_fcircle(t_window *window, t_vec2i *v, int radius, int colour)
+{
+	t_vec2i p;
+	t_vec2i	d;
+	int		err;
+
+	p.x = radius - 1;
+	p.y = 0;
+	d.x = 1;
+	d.y = 1;
+	err = d.x - (radius << 1);
+	while (p.x >= p.y)
+	{
+		fill_oct(window, v, p, colour);
+		if (err <= 0)
+		{
+			p.y++;
+			err += d.y;
+			d.y += 2;
+			continue;
+		}
+		p.x--;
+		d.x += 2;
+		err += d.x - (radius << 1);
+	}
 }
