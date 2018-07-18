@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 01:05:03 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/18 02:02:26 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ int		draw(void *p)
 	
 	
 	update_hero(env->hero);
-	for(int y = 0; y < ROWS; y++)
-		for(int x = 0; x < COLS; x++)
-		{
-			if (grid_get(&env->map, x, y))
-				wfx_rect(env->window, &VEC2I(x * CELL + 1, y * CELL + 1), &VEC2I(x * CELL + CELL, y * CELL + CELL), 0x00ff00ff, true);
-		}
+	// for(int y = 0; y < ROWS; y++)
+	// 	for(int x = 0; x < COLS; x++)
+	// 	{
+	// 		if (grid_get(&env->map, x, y))
+	// 			wfx_rect(env->window, &VEC2I(x * CELL + 1, y * CELL + 1), &VEC2I(x * CELL + CELL, y * CELL + CELL), 0x00ff00ff, true);
+	// 	}
 	draw_camera(env->window, env->hero, env->map, CELL);
-	wfx_grid(env->window, &VEC2I(0, 0), COLS, ROWS, CELL);
+	//wfx_grid(env->window, &VEC2I(0, 0), COLS, ROWS, CELL);
 	draw_hero(env->window, env->hero, CELL);
 	wfx_blit(env->window);
 	wfx_clear_window(env->window);

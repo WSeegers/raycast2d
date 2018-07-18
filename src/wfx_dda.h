@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:44:01 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 00:45:50 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/18 01:23:33 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 
 # include "libwtcfx.h"
 
+# define HIT_NORTH	1
+# define HIT_SOUTH	2
+# define HIT_WEST	3
+# define HIT_EAST	4
+
 typedef struct	s_hit_report
 {
-	double	hit_dist;
-	int		value;
-	int		boundry;
+	double		hit_dist;
+	t_vec2i		cell;
+	int			side;
+	int			value;
 }				t_hit_report;
 
 typedef struct	s_dda
@@ -34,6 +40,6 @@ typedef struct	s_dda
 	double 	hitdist;
 }				t_dda;
 
-double		wfx_dda(t_vec2 start, t_vec2 direction, t_grid map);
+t_hit_report	wfx_dda(t_vec2 start, t_vec2 direction, t_grid map);
 
 #endif

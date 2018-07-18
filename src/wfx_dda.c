@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 23:22:41 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 00:55:04 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/18 01:59:34 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 static void	dda_loop(t_dda *dda, t_grid map)
 {
-	int yhit;
-
 	while (!GRID_GET(map, dda->cell.x, dda->cell.y))
     {
     	if (dda->side.x < dda->side.y)
     	{
     	  dda->side.x += dda->d.x;
     	  dda->cell.x += dda->step.x;
-    	  yhit = 0;
+    	  dda->yhit = 0;
     	}
     	else
     	{
@@ -33,12 +31,21 @@ static void	dda_loop(t_dda *dda, t_grid map)
     }
 }
 
-double		wfx_dda(t_vec2 start, t_vec2 direction, t_grid map)
+void	get_hit_side(t_dda *dda, t_hit_report *hr)
 {
-	t_dda	dda;
+	if (dda->yhit)
+		hr->side = (dda->step.y == 1) ? HIT_NORTH : HIT_SOUTH;
+	else
+		hr->side = (dda->step.x == 1) ? HIT_WEST : HIT_EAST;
+}
+
+t_hit_report	wfx_dda(t_vec2 start, t_vec2 direction, t_grid map)
+{
+	t_dda			dda;
+	t_hit_report	hr;
 	
-	dda.d.x = fabs(1.0 / direction.x);
-	dda.d.y = fabs(1.0 / direction.y);
+	dda.d.x = CLAMP(fabs(1.0 / direction.x), 1, 50);
+	dda.d.y = CLAMP(fabs(1.0 / direction.y), 1, 50);
 	dda.cell = VEC2_TO_I(start);
 	if (direction.x < 0 && (dda.step.x = -1))
       dda.side.x = (start.x - dda.cell.x) * dda.d.x;
@@ -50,7 +57,10 @@ double		wfx_dda(t_vec2 start, t_vec2 direction, t_grid map)
       dda.side.y = (dda.cell.y + 1.0 - start.y) * dda.d.y;
 	dda_loop(&dda, map);
 	if (!dda.yhit)
-		return((dda.cell.x - start.x + (1 - dda.step.x) / 2) / direction.x);
+		MIN(hr.hit_dist = (dda.cell.x - start.x + (1 - dda.step.x) / 2) / direction.x, 100);
 	else
-		return((dda.cell.y - start.y + (1 - dda.step.y) / 2) / direction.y);
+		MIN(hr.hit_dist = (dda.cell.y - start.y + (1 - dda.step.y) / 2) / direction.y, 100);
+	get_hit_side(&dda, &hr);
+	hr.value = GRID_GET(map, dda.cell.x, dda.cell.y);
+	return (hr);
 }
