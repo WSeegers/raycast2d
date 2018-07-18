@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 09:00:58 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/18 12:15:17 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,6 @@
 
 #define WIDTH (ROWS * CELL)
 #define HEIGHT (COLS * CELL)
-
-int		draw(void *p)
-{
-	t_env	*env = (t_env*)p;
-	
-	
-	update_hero(env->hero);
-	for(int y = 0; y < ROWS; y++)
-		for(int x = 0; x < COLS; x++)
-		{
-			if (grid_get(&env->map, x, y))
-				wfx_rect(env->window, &VEC2I(x * CELL + 1, y * CELL + 1), &VEC2I(x * CELL + CELL, y * CELL + CELL), 0x00ff00ff, true);
-		}
-	//draw_map(env->window, env->hero, env->map, CELL);
-	//wfx_grid(env->window, &VEC2I(0, 0), COLS, ROWS, CELL);
-	draw_hero(env->window, env->hero, CELL);
-	wfx_blit(env->window);
-	wfx_clear_window(env->window);
-	return (0);
-}
 
 int	motion_hook(int x, int y, void *p)
 {
@@ -105,16 +85,11 @@ int		main(void)
 	env.hero = &hero;
 	get_map(&env.map);
 
-	hero.plane = VEC2(0, 0.66);
+	hero.plane = VEC2(0, 0.65);
 	
-	//mlx_hook(window.ptr, 2, 0, key_release_hook, &env);
-	//mlx_key_hook(window.ptr, key_hook, &env);
-	
-
 	wfx_key_press_hook(&window, key_press, &env);
 	wfx_key_release_hook(&window, key_release, &env);
 
-	//mlx_hook(window.ptr, 6, 0, motion_hook, &env);
-	wfx_loop_hook(&window, draw_map, &env);
+	wfx_loop_hook(&window, draw_fps, &env);
 	wfx_start(&window);
 }
