@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 12:45:15 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 00:57:31 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/18 08:59:56 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include "libwtcfx.h"
 
-# define HERO_COL 0x00ffffff
-# define HERO_SIZE 10
+# define HERO_COL	0x00ffffff
+# define HERO_SIZE	10
+# define HERO_SPD	0.1
+# define HERO_ROT	0.02 * M_PI
 
 typedef struct	s_hero
 {
@@ -31,8 +33,7 @@ void	draw_hero(t_window *window, t_hero *hero, double scale);
 void	update_hero(t_hero *hero);
 void	rotate_hero(t_hero *hero, double rad);
 
-void	draw_camera(t_window *window, t_hero *hero, t_grid map, double scale);
-t_hero	scale_hero(t_hero hero, double scale);
-
+int		key_release(int key, void *p);
+int		key_press(int key, void *p);
 
 #endif

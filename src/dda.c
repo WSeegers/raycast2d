@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wfx_dda.c                                          :+:      :+:    :+:   */
+/*   dda.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 23:22:41 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 01:59:34 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/18 08:13:05 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wfx_dda.h"
+#include "dda.h"
 
 static void	dda_loop(t_dda *dda, t_grid map)
 {
@@ -39,7 +39,7 @@ void	get_hit_side(t_dda *dda, t_hit_report *hr)
 		hr->side = (dda->step.x == 1) ? HIT_WEST : HIT_EAST;
 }
 
-t_hit_report	wfx_dda(t_vec2 start, t_vec2 direction, t_grid map)
+t_hit_report	dda(t_vec2 start, t_vec2 direction, t_grid map)
 {
 	t_dda			dda;
 	t_hit_report	hr;
@@ -57,9 +57,9 @@ t_hit_report	wfx_dda(t_vec2 start, t_vec2 direction, t_grid map)
       dda.side.y = (dda.cell.y + 1.0 - start.y) * dda.d.y;
 	dda_loop(&dda, map);
 	if (!dda.yhit)
-		MIN(hr.hit_dist = (dda.cell.x - start.x + (1 - dda.step.x) / 2) / direction.x, 100);
+		MIN(hr.hit_dist = (dda.cell.x - start.x + (1 - dda.step.x) / 2) / direction.x, 5);
 	else
-		MIN(hr.hit_dist = (dda.cell.y - start.y + (1 - dda.step.y) / 2) / direction.y, 100);
+		MIN(hr.hit_dist = (dda.cell.y - start.y + (1 - dda.step.y) / 2) / direction.y, 5);
 	get_hit_side(&dda, &hr);
 	hr.value = GRID_GET(map, dda.cell.x, dda.cell.y);
 	return (hr);

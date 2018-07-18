@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wfx_dda.h                                          :+:      :+:    :+:   */
+/*   dda.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:44:01 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 01:23:33 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/18 08:22:08 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WFX_DDA
-# define WFX_DDA
+#ifndef DDA
+# define DDA
 
 # include "libwtcfx.h"
 
@@ -40,6 +40,6 @@ typedef struct	s_dda
 	double 	hitdist;
 }				t_dda;
 
-t_hit_report	wfx_dda(t_vec2 start, t_vec2 direction, t_grid map);
+t_hit_report	dda(t_vec2 start, t_vec2 direction, t_grid map);
 
 #endif

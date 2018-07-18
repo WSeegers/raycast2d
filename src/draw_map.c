@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera_draw.c                                      :+:      :+:    :+:   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 18:12:48 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 02:00:06 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/18 09:04:45 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libwtcfx.h"
-#include "hero.h"
-#include "wfx_dda.h"
+#include "draw_map.h"
 
-void	draw_ray(t_window *window, t_hero *hero, t_grid map, double scale)
+//todo: create appropriatly
+#define ROWS 24
+#define COLS 24
+
+void	draw_rays(t_window *window, t_hero *hero, t_grid map, double scale)
 {
 	t_hit_report	hr;
 	t_vec2i			p2;
@@ -23,7 +25,7 @@ void	draw_ray(t_window *window, t_hero *hero, t_grid map, double scale)
 	for	(int x = 0; x < window->width; x++)
 	{
 		ray = vec2_add(hero->direction, vec2_scale(hero->plane, 2 * x / (double)window->width - 1));
-		hr = wfx_dda(hero->pos, ray, map);
+		hr = dda(hero->pos, ray, map);
 		if (hr.side == HIT_EAST || hr.side == HIT_WEST)
 		{
 			p2 = VEC2_TO_I(vec2_scale(vec2_add(hero->pos, vec2_scale(ray, hr.hit_dist)), scale));
@@ -50,11 +52,25 @@ void	draw_plane(t_window *window, t_hero *hero)
 	wfx_line(window, &VEC2_TO_I(p1), &VEC2_TO_I(p3), 0x0000ffff);
 }
 
-void	draw_camera(t_window *window, t_hero *hero, t_grid map, double scale)
+int		draw_map(void *parm)
 {
-	t_hero sc_hero;
+	t_env *env;
 
-	sc_hero = scale_hero(*hero, scale);
-	draw_plane(window, &sc_hero);
-	draw_ray(window, hero, map, scale);
+	env = (t_env*)parm;
+	update_hero(env->hero);
+	for(int y = 0; y < ROWS; y++)
+		for(int x = 0; x < COLS; x++)
+		{
+			if (grid_get(&env->map, x, y))
+				wfx_rect(env->window,
+					&VEC2I(x * MAP_SCALE + 1, y * MAP_SCALE + 1),
+					&VEC2I(x * MAP_SCALE + MAP_SCALE, y * MAP_SCALE + MAP_SCALE),
+					0x00ff00ff, true);
+		}
+	//wfx_grid(env->window, &VEC2I(0, 0), COLS, ROWS, MAP_SCALE);
+	draw_rays(env->window, env->hero, env->map, MAP_SCALE);
+	draw_hero(env->window, env->hero, MAP_SCALE);
+	wfx_blit(env->window);
+	wfx_clear_window(env->window);
+	return (0);
 }
