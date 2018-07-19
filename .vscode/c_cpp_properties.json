@@ -3,8 +3,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/toolkit-wtc/include"
+                "${workspaceFolder}/src",
+				"${workspaceFolder}/toolkit-wtc/include/"
             ],
             "defines": [],
             "macFrameworkPath": [

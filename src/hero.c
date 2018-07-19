@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 12:36:11 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/17 19:23:19 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/19 19:58:37 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_hero(t_window *window, t_hero *hero, double scale)
 	t_hero sc_hero;
 
 	sc_hero = scale_hero(*hero, scale);
-	wfx_fcircle(window, &VEC2_TO_I(sc_hero.pos), HERO_SIZE, HERO_COL);
+	wfx_fcircle(window, VEC2_TO_I(sc_hero.pos), HERO_SIZE, HERO_COL);
 	heading = VEC2_TO_I(vec2_add(sc_hero.pos, sc_hero.direction));
-	wfx_line(window, &VEC2_TO_I(sc_hero.pos), &heading, 0x00ff0000);
+	wfx_line(window, VEC2_TO_I(sc_hero.pos), heading, 0x00ff0000);
 }

@@ -6,13 +6,13 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 11:22:11 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/17 18:05:01 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/19 19:57:36 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
 
-void		wfx_rect(t_window *window, t_vec2i *p1, t_vec2i *p2, int colour, bool fill)
+void		wfx_rect(t_window *window, t_vec2i p1, t_vec2i p2, int colour, bool fill)
 {
     t_vec2i start;
     t_vec2i end;
@@ -20,10 +20,10 @@ void		wfx_rect(t_window *window, t_vec2i *p1, t_vec2i *p2, int colour, bool fill
 
     if (fill)
     {
-        start.x = MIN(p1->x, p2->x);
-        end.x = MAX(p1->x, p2->x);
-        start.y = MIN(p1->y, p2->y);
-        end.y = MAX(p1->y, p2->y);
+        start.x = MIN(p1.x, p2.x);
+        end.x = MAX(p1.x, p2.x);
+        start.y = MIN(p1.y, p2.y);
+        end.y = MAX(p1.y, p2.y);
         count.y = start.y;
         while (count.y < end.y)
         {
@@ -35,13 +35,13 @@ void		wfx_rect(t_window *window, t_vec2i *p1, t_vec2i *p2, int colour, bool fill
     }
     else
     {
-        count.x = p2->x;
-        count.y = p1->y;
-        wfx_line(window, p1, &count, colour);
-        wfx_line(window, p2, &count, colour);
-        count.x = p1->x;
-        count.y = p2->y;
-        wfx_line(window, p1, &count, colour);
-        wfx_line(window, p2, &count, colour);
+        count.x = p2.x;
+        count.y = p1.y;
+        wfx_line(window, p1, count, colour);
+        wfx_line(window, p2, count, colour);
+        count.x = p1.x;
+        count.y = p2.y;
+        wfx_line(window, p1, count, colour);
+        wfx_line(window, p2, count, colour);
     }
 }

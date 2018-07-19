@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 19:04:09 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/17 14:56:49 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/19 18:10:13 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void		wfx_init_window(t_window *window, int width, int height, char *title)
 	window->back = wfx_create_image();
 	wfx_init_image(window->back, width, height);
 	window->frame_count = 0;
-	//wfx_loop_hook(window, wfx_std_loop, window->param);
 }
 
 void		wfx_destroy_window(t_window *window)
@@ -44,4 +43,9 @@ void		wfx_destroy_window(t_window *window)
 	wfx_destroy_image(window->back);
 	window->back = NULL;
 	mlx_destroy_window(wfx_create_window(), window->ptr);
+}
+
+void	wfx_image_to_window(t_window *window, t_image *image, t_vec2i pos)
+{
+	wfx_image_to_image(window->back, image, pos);
 }

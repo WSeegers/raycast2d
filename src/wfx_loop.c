@@ -6,18 +6,15 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:34:53 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/17 15:05:12 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/19 04:35:34 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
 
-int		wfx_std_loop(t_window *window)
+void	wfx_expose_hook(t_window *window, int (*f)(void*), void *param)
 {
-	window->update(window->param);
-	window->draw(window->param);
-	wfx_blit(window);
-	return (0);
+	mlx_expose_hook(window->ptr, f, param);
 }
 
 void	wfx_loop_hook(t_window *window, int (*f)(void*), void *param)

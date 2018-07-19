@@ -14,24 +14,17 @@
 
 static void	dda_loop(t_dda *dda, t_grid map)
 {
-	int x;
-	int y;
-	double startx = dda->side.x;
-	double starty = dda->side.y;
-
-	x = 0;
-	y = 0;
 	while (!GRID_GET(map, dda->cell.x, dda->cell.y))
     {
     	if (dda->side.x < dda->side.y)
     	{
-    	  dda->side.x = startx + (dda->d.x * ++x);
+    	  dda->side.x += dda->d.x;
     	  dda->cell.x += dda->step.x;
     	  dda->yhit = 0;
     	}
     	else
     	{
-    	  dda->side.y = starty + (dda->d.y * ++y);
+    	  dda->side.y += dda->d.y;
     	  dda->cell.y += dda->step.y;
     	  dda->yhit = 1;
     	}
@@ -51,8 +44,8 @@ t_hit_report	dda(t_vec2 start, t_vec2 direction, t_grid map)
 	t_dda			dda;
 	t_hit_report	hr;
 	
-	dda.d.x = CLAMP(fabs(1.0 / direction.x), 1, 50);
-	dda.d.y = CLAMP(fabs(1.0 / direction.y), 1, 50);
+	dda.d.x = fabs(1.0 / direction.x);
+	dda.d.y = fabs(1.0 / direction.y);
 	dda.cell = VEC2_TO_I(start);
 	if (direction.x < 0 && (dda.step.x = -1))
       dda.side.x = (start.x - dda.cell.x) * dda.d.x;

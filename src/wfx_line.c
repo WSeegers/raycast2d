@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wfx_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 14:27:52 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/15 22:18:12 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/19 19:53:24 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,31 +70,38 @@ static void	draw_on_y(t_window *window, t_vec2i p1, t_vec2i p2, int colour)
 	}
 }
 
-void		wfx_line(t_window *window, t_vec2i *p1, t_vec2i *p2, int colour)
+void		swap_points(t_vec2i *v1, t_vec2i *v2)
+{
+	t_vec2i temp;
+
+	temp = *v1;
+	*v1 = *v2;
+	*v2 = temp;
+}
+
+void		wfx_line(t_window *window, t_vec2i p1, t_vec2i p2, int colour)
 {
 	int		dx;
 	int		dy;
 	double	m;
 
-	if (p1->x == p2->x)
+	if (p1.x == p2.x)
 	{
-		if (p1->y == p2->y)
-			wfx_set_pixel(window, p1->x, p1->y, colour);
+		if (p1.y == p2.y)
+			wfx_set_pixel(window, p1.x, p1.y, colour);
 		else
-			draw_vert(window, *p1, *p2, colour);
+			draw_vert(window, p1, p2, colour);
 		return ;
 	}
-	if (p1->x > p2->x)
-		f_swapptr((void**)&p1, (void**)&p2);
-	m =
-		(double)(dy = p2->y - p1->y) /
-		(double)(dx = p2->x - p1->x);
+	if (p1.x > p2.x)
+		swap_points(&p1, &p2);
+	m =	(double)(dy = p2.y - p1.y) / (double)(dx = p2.x - p1.x);
 	if (fabs(m) <= 1)
-		draw_on_x(window, *p1, *p2, colour);
+		draw_on_x(window, p1, p2, colour);
 	else
 	{
-		if (p1->y > p2->y)
-			f_swapptr((void**)&p1, (void**)&p2);
-		draw_on_y(window, *p1, *p2, colour);
+		if (p1.y > p2.y)
+			draw_on_y(window, p2, p1, colour);
+		draw_on_y(window, p1, p2, colour);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 12:15:17 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/19 18:52:03 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@
 
 #define WIDTH (ROWS * CELL)
 #define HEIGHT (COLS * CELL)
-
-int	motion_hook(int x, int y, void *p)
-{
-	t_env	*env = (t_env*)p;
-
-	env->hero->pos.x = x;
-	env->hero->pos.y = y;
-
-	return (0);
-}
 
 void	get_map(t_grid *map)
 {
@@ -66,30 +56,64 @@ void	get_map(t_grid *map)
 			grid_set(map, MAP[y][x], x, y);
 }
 
+int		draw_splash(void *p)
+{
+	t_env	*env;
+
+	env = (t_env*)p;
+	for (int y = 0; y < env->window->height; y++)
+		for (int x = 0; x < env->window->width; x++)
+	 		wfx_set_pixel(env->window, x, y, x * y + y + x);
+	//wfx_blit(env->window);
+	return (1);
+}
+
+int		splash_key(int key, void *p)
+{
+	t_env	*env;
+
+	(void)key;
+	env = (t_env*)p;
+	invoke_state(env->window, &env->game_state, env);
+	return (1);
+}
+
 int		main(void)
 {
 	t_env		env;
-	t_mlx		mlx;
 	t_window	window;
 	t_hero		hero;
+	t_state		splash;
 
-	mlx = wfx_get_mlx();
 	wfx_init_window(&window, WIDTH, HEIGHT, "2d Raytest");
 	hero.pos = VEC2(COLS / 2, ROWS / 2);
 	hero.velocity = 0;
 	hero.direction = vec2_norm(VEC2(-1, 0));
 	hero.rotation = 0;
 
-	env.mlx = mlx;
 	env.window = &window;
 	env.hero = &hero;
 	get_map(&env.map);
 
 	hero.plane = VEC2(0, 0.65);
 	
-	wfx_key_press_hook(&window, key_press, &env);
-	wfx_key_release_hook(&window, key_release, &env);
+	splash.key_down = splash_key;
+	splash.loop = draw_splash;
 
-	wfx_loop_hook(&window, draw_fps, &env);
+	env.game_state.loop = draw_fps;
+	env.game_state.key_down = key_press;
+	env.game_state.key_up = key_release;
+
+	int size;
+	int size2;
+	//void *pic = mlx_xpm_file_to_image(window.mlx, "assets/noise.xpm", &size, &size2);
+	
+	t_image	*pic = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/noise.xpm");
+	mlx_put_image_to_window(window.mlx, window.ptr, pic->ptr, 10, 10);
+	t_image *pic_b = wfx_resize_image_nn(pic, VEC2I(200, 400));
+	wfx_image_to_window(&window, pic, VEC2I(500, 10));
+	wfx_image_to_window(&window, pic_b, VEC2I(10, 10));
+	wfx_blit(&window);
+	invoke_state(&window, &env.game_state, &env);
 	wfx_start(&window);
 }
