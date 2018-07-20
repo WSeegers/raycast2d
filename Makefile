@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+         #
+#    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/13 17:45:03 by dotmauws          #+#    #+#              #
-#    Updated: 2018/07/15 20:14:54 by wseegers         ###   ########.fr        #
+#    Updated: 2018/07/20 10:01:37 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ else
 endif
 
 all : make_LIB $(NAME)
+	@echo "wseegers" > author
 
 make_LIB :
 	make -C toolkit-wtc
