@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 19:47:41 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 12:20:18 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/19 21:51:55 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		wfx_blit(t_window *window)
 {
-	double frame_dif;
-	struct timespec wait;
+	//double frame_dif;
+	//struct timespec wait;
 
 	window->frame_count++;
 	f_swapptr((void**)&window->front, (void**)&window->back);

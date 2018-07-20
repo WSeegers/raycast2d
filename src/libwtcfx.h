@@ -6,12 +6,14 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:47:21 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/19 19:59:09 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/20 09:39:41 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBWTCFX_H
 # define LIBWTCFX_H
+
+//todo: Clipping on draw_line function
 
 # include <math.h>
 # include <mlx.h>
@@ -105,6 +107,7 @@ typedef struct	s_state
 }				t_state;
 
 t_state		*create_state(void);
+void		wfx_init_state(t_state *state);
 
 typedef	struct	s_window
 {

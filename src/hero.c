@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 12:36:11 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/19 19:58:37 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/20 09:37:04 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,25 @@ void	rotate_hero(t_hero *hero, double rad)
 	hero->plane = vec2_rotate(hero->plane, rad);
 }
 
-void	update_hero(t_hero *hero)
+void	update_hero(t_hero *hero, t_grid map)
 {
+	t_vec2	r;
+	t_vec2	movement;
+
 	rotate_hero(hero, hero->rotation);
-	hero->pos = vec2_add(hero->pos, vec2_scale(hero->direction, hero->velocity));
+	movement = vec2_scale(hero->direction, hero->velocity);
+	hero->pos = vec2_add(hero->pos, movement);
+	if (GRID_GET(map, (int)hero->pos.x, (int)hero->pos.y))
+	{
+		if (!GRID_GET(map, (int)(hero->pos.x - movement.x), (int)hero->pos.y))
+			hero->pos.x = hero->pos.x - movement.x;
+		else if (!GRID_GET(map, (int)hero->pos.x, (int)(hero->pos.y - movement.y)))
+			hero->pos.y = hero->pos.y - movement.y;
+		else
+		{
+			hero->pos = vec2_sub(hero->pos, movement);
+		}
+	}
 }
 
 t_hero	scale_hero(t_hero hero, double scale)

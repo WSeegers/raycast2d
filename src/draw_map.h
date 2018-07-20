@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:47:07 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 12:21:46 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/19 21:41:01 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,5 @@
 
 int		draw_map(void *param);
 t_hero	scale_hero(t_hero hero, double scale);
-
-int 	draw_fps(void *parm);
 
 #endif

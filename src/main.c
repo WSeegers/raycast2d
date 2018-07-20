@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/19 18:52:03 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/20 09:26:26 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #define ROWS 24
 #define COLS 24
 
-#define WIDTH (ROWS * CELL)
-#define HEIGHT (COLS * CELL)
+#define WIDTH (1200)
+#define HEIGHT (800)
 
 void	get_map(t_grid *map)
 {
@@ -30,7 +30,7 @@ void	get_map(t_grid *map)
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
 		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,2,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
+		{1,0,0,0,0,0,2,0,2,0,2,2,2,2,2,3,0,0,0,3,0,0,0,1},
 		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -95,14 +95,16 @@ int		main(void)
 	env.hero = &hero;
 	get_map(&env.map);
 
-	hero.plane = VEC2(0, 0.65);
+	hero.plane = VEC2(0, 0.66);
 	
 	splash.key_down = splash_key;
 	splash.loop = draw_splash;
 
-	env.game_state.loop = draw_fps;
+	wfx_init_state(&env.game_state);
+	env.game_state.loop = game_loop;
 	env.game_state.key_down = key_press;
 	env.game_state.key_up = key_release;
+	env.game_state.mouse_move = NULL;
 
 	int size;
 	int size2;

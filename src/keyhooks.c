@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:32:23 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 09:54:00 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/19 21:42:14 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	key_release(int key, void *p)
 	else if (key == KEY_S)
 		env->hero->velocity += HERO_SPD;
 	else if (key == KEY_TAB)
-		wfx_loop_hook(env->window, draw_fps, p);
+		wfx_loop_hook(env->window, game_loop, p);
 	return (0);
 }
 

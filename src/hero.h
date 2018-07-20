@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 12:45:15 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/18 08:59:56 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/19 22:02:20 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct	s_hero
 }               t_hero;
 
 void	draw_hero(t_window *window, t_hero *hero, double scale);
-void	update_hero(t_hero *hero);
+void	update_hero(t_hero *hero, t_grid map);
 void	rotate_hero(t_hero *hero, double rad);
 
 int		key_release(int key, void *p);

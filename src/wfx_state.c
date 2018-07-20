@@ -6,15 +6,16 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 04:36:40 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/19 05:34:28 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/20 09:24:03 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
+#include "f_memory.h"
 
-static int	do_nothing(void)
+void 	wfx_init_state(t_state *state)
 {
-	return (0);
+	f_bzero(state, sizeof(*state));
 }
 
 void	invoke_state(t_window *window, t_state *state, void *param)
@@ -22,7 +23,7 @@ void	invoke_state(t_window *window, t_state *state, void *param)
 	if (state->loop)
 		wfx_loop_hook(window, state->loop, param);
 	else
-		wfx_loop_hook(window, NULL, NULL);
+		wfx_loop_hook(window, NULL, param);
 	if (state->key_down)
 		wfx_key_press_hook(window, state->key_down, param);
 	else
@@ -38,9 +39,10 @@ void	invoke_state(t_window *window, t_state *state, void *param)
 	if (state->mouse_up)
 		wfx_mouse_release_hook(window, state->mouse_up, param);
 	else
-		wfx_mouse_release_hook(window,NULL, NULL);
+		wfx_mouse_release_hook(window, NULL, NULL);
 	if (state->mouse_move)
 		wfx_motion_hook(window, state->mouse_move, param);
 	else
 		wfx_motion_hook(window, NULL, NULL);
+	
 }
