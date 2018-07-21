@@ -4,6 +4,7 @@
 		"libwtcfx.h": "c",
 		"mlx.h": "c",
 		"limits": "cpp",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"type_traits": "c"
 	}
 }

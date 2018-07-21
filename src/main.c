@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/20 09:26:26 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/21 21:57:53 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #define ROWS 24
 #define COLS 24
 
-#define WIDTH (1200)
-#define HEIGHT (800)
+#define WIDTH (1024)
+#define HEIGHT (540)
 
 void	get_map(t_grid *map)
 {
@@ -30,19 +30,19 @@ void	get_map(t_grid *map)
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
 		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,2,0,2,2,2,2,2,3,0,0,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+		{1,0,0,0,0,0,0,0,2,0,2,1,2,3,3,3,0,0,0,3,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+		{1,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,0,0,0,0,1,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -86,10 +86,11 @@ int		main(void)
 	t_state		splash;
 
 	wfx_init_window(&window, WIDTH, HEIGHT, "2d Raytest");
-	hero.pos = VEC2(COLS / 2, ROWS / 2);
+	hero.pos = VEC2(4, 4);
 	hero.velocity = 0;
 	hero.direction = vec2_norm(VEC2(-1, 0));
 	hero.rotation = 0;
+	hero.strafe = 0;
 
 	env.window = &window;
 	env.hero = &hero;
@@ -101,7 +102,7 @@ int		main(void)
 	splash.loop = draw_splash;
 
 	wfx_init_state(&env.game_state);
-	env.game_state.loop = game_loop;
+	env.game_state.loop = fp_basic;
 	env.game_state.key_down = key_press;
 	env.game_state.key_up = key_release;
 	env.game_state.mouse_move = NULL;
@@ -110,11 +111,15 @@ int		main(void)
 	int size2;
 	//void *pic = mlx_xpm_file_to_image(window.mlx, "assets/noise.xpm", &size, &size2);
 	
-	t_image	*pic = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/noise.xpm");
-	mlx_put_image_to_window(window.mlx, window.ptr, pic->ptr, 10, 10);
-	t_image *pic_b = wfx_resize_image_nn(pic, VEC2I(200, 400));
-	wfx_image_to_window(&window, pic, VEC2I(500, 10));
-	wfx_image_to_window(&window, pic_b, VEC2I(10, 10));
+	env.hd_textures[0] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/stone.xpm");
+	env.hd_textures[1] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/ceiling.xpm");
+	env.hd_textures[2] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/stone2.xpm");
+	env.hd_textures[3] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/noise.xpm");
+	// t_image	*pic = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/noise.xpm");
+	// mlx_put_image_to_window(window.mlx, window.ptr, pic->ptr, 10, 10);
+	// t_image *pic_b = wfx_resize_image_nn(pic, VEC2I(200, 400));
+	// wfx_image_to_window(&window, pic, VEC2I(500, 10));
+	// wfx_image_to_window(&window, pic_b, VEC2I(10, 10));
 	wfx_blit(&window);
 	invoke_state(&window, &env.game_state, &env);
 	wfx_start(&window);

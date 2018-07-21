@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 12:45:15 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/19 22:02:20 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/21 09:42:05 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_hero
     t_vec2	pos;
 	double	velocity;
 	t_vec2	direction;
+	double	strafe;
 	double 	rotation;
 	t_vec2	plane;
 }               t_hero;

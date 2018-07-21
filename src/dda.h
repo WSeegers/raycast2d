@@ -26,6 +26,8 @@ typedef struct	s_hit_report
 	t_vec2i		cell;
 	int			side;
 	int			value;
+	double		offset;
+	t_vec2		pos;
 }				t_hit_report;
 
 typedef struct	s_dda

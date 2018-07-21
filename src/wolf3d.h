@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:35:53 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/19 21:38:24 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/21 21:57:42 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,18 @@
 # include "hero.h"
 # include "wfx_mac_keys.h"
 
+typedef	t_image *t_image_set[8];
+
 typedef struct	s_env
 {
 	t_window	*window;
 	t_hero		*hero;
 	t_grid		map;
 	t_state		game_state;
+	t_image_set	hd_textures;
 }				t_env;
 
-int 	game_loop(void *param);
+int 	fp_basic(void *param);
 int		draw_map(void *parm);
 
 #endif

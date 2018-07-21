@@ -6,12 +6,11 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 14:27:52 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 08:35:39 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/21 10:35:31 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libwtcfx.h"
-#include "f_math.h"
+#include "wfx_line.h"
 
 static void	draw_on_x(t_window *window, t_vec2i p1, t_vec2i p2, int colour)
 {
@@ -56,79 +55,6 @@ static void	draw_on_y(t_window *window, t_vec2i p1, t_vec2i p2, int colour)
 			x += (p2.x > p1.x) ? 1 : -1;
 			e -= dy * 2;
 		}
-	}
-}
-
-#define OCT_CENT	(0x000)
-#define OCT_LEFT	(0xf000)
-#define OCT_RIGHT	(0x000f)
-#define OCT_BOT		(0x00f0)
-#define OCT_TOP		(0x0f00)
-
-typedef int			oct_code;
-
-static int	get_octant(t_window	*window, t_vec2i p)
-{
-	oct_code	ret;
-
-	ret = 0;
-	if (p.x < 0)
-		ret |= OCT_LEFT;
-	else if	(p.x > window->width)
-		ret |= OCT_RIGHT;
-	if	(p.y < 0)
-		ret	|= OCT_TOP;
-	else if (p.y > window->height)
-		ret |= OCT_BOT;
-	return (ret);
-}
-
-#include <stdlib.h>
-
-int		clip(t_window *window, t_vec2i *p1, t_vec2i *p2)
-{
-	oct_code	p1_oct;
-	oct_code	p2_oct;
-	oct_code	check;
-	t_vec2		v1;
-	t_vec2		v2;
-	t_vec2i		temp;
-
-	v1 = VEC2_TO_F((*p1));
-	v2 = VEC2_TO_F((*p2));
-	while (1)
-	{
-		p1_oct = get_octant(window, *p1);
-		p2_oct = get_octant(window, *p2);
-		if (!(p1_oct | p2_oct))
-			return (0);
-		if (p1_oct & p2_oct)
-			return (1);
-		check = p1_oct ? p1_oct : p2_oct;
-		if (check & OCT_BOT)
-		{
-			temp.x = v1.x + (v2.x - v1.x) * (-v1.y + (window->height)) / (v2.y - v1.y);
-			temp.y = window->height;
-		}
-		else if (check & OCT_TOP)
-		{
-			temp.x = v1.x + (v2.x - v1.x) * (-v1.y) / (v2.y - v1.y);
-			temp.y = 0;
-		}
-		else if (check & OCT_RIGHT)
-		{
-			temp.y = v1.y + (v2.y - v1.y) * (-v1.x + (window->width)) / (v2.x - v1.x);
-			temp.x = window->width;
-		}
-		else if (check & OCT_LEFT)
-		{
-			temp.y = v1.y + (v2.y - v1.y) * (-v1.x) / (v2.x - v1.x);
-			temp.x = 0;
-		}
-		if (check == p1_oct)
-			*p1 = temp;
-		else
-			*p2 = temp;
 	}
 }
 
