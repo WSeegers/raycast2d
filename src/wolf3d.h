@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:35:53 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 21:57:42 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/21 23:29:02 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 # include "libwtcfx.h"
 # include "hero.h"
 # include "wfx_mac_keys.h"
+
+# define WIDTH (640)
+# define HEIGHT (400)
+
+# define MAX_TEXTURE (8)
 
 typedef	t_image *t_image_set[8];
 

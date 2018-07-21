@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:47:21 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/20 09:39:41 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/21 22:43:15 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,9 @@ typedef	struct	s_window
 	//clock_t			last_fps;
 	unsigned long	frame_count;
 	long			fps;
-	void			*param;
+	//void			*param;
+	int				resx;
+	int				resy;
 }				t_window;
 
 t_window	*wfx_create_window(void);

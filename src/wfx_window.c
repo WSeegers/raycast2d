@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 19:04:09 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/19 18:10:13 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/21 22:26:09 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,18 @@ void		wfx_init_window(t_window *window, int width, int height, char *title)
 	window->back = wfx_create_image();
 	wfx_init_image(window->back, width, height);
 	window->frame_count = 0;
+	window->resx = 0;
+	window->resy = 0;
+}
+
+void		wfx_set_resolution(t_window *window, int newx, int newy)
+{
+	if (newx >= window->width || newy >= window->height)
+		f_eexit(0, "Check res size, it must be less than the initialised window");
+	window->resx = window->width;
+	window->resy = window->height;
+	window->width = newx;
+	window->height = newy;
 }
 
 void		wfx_destroy_window(t_window *window)

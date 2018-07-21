@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 21:57:53 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/21 23:28:29 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@
 #define ROWS 24
 #define COLS 24
 
-#define WIDTH (1024)
-#define HEIGHT (540)
 
 void	get_map(t_grid *map)
 {
 	char MAP[ROWS][COLS] = {
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
@@ -47,13 +45,13 @@ void	get_map(t_grid *map)
 		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+		{1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,5,6,1,1,1,1,1}
 	};
 
 	grid_init(map, COLS, ROWS);
 	for (int y = 0; y < ROWS; y++)
 		for (int x = 0; x < COLS; x++)
-			grid_set(map, MAP[y][x], x, y);
+			grid_set(map, CLAMP(MAP[y][x], 0, 6), x, y);
 }
 
 int		draw_splash(void *p)
@@ -111,10 +109,14 @@ int		main(void)
 	int size2;
 	//void *pic = mlx_xpm_file_to_image(window.mlx, "assets/noise.xpm", &size, &size2);
 	
-	env.hd_textures[0] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/stone.xpm");
-	env.hd_textures[1] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/ceiling.xpm");
-	env.hd_textures[2] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/stone2.xpm");
-	env.hd_textures[3] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/noise.xpm");
+	env.hd_textures[0] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/bluestone.xpm");
+	env.hd_textures[1] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/wood.xpm");
+	env.hd_textures[3] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/eagle.xpm");
+	env.hd_textures[2] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/greystone.xpm");
+	env.hd_textures[4] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/purplestone.xpm");
+	env.hd_textures[5] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/redbrick.xpm");
+	env.hd_textures[6] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/mossy.xpm");
+	env.hd_textures[7] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/colorstone.xpm");
 	// t_image	*pic = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/noise.xpm");
 	// mlx_put_image_to_window(window.mlx, window.ptr, pic->ptr, 10, 10);
 	// t_image *pic_b = wfx_resize_image_nn(pic, VEC2I(200, 400));

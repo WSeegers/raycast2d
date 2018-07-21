@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 21:31:18 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 22:08:35 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/21 22:48:47 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	draw_first_person2(t_env *env)
 		hr = dda(env->hero->pos, ray, env->map);
 		p1 = VEC2I(env->window->width - x, (env->window->height / 2) - (1 / hr.hit_dist * env->window->height / 2));
 		p2 = VEC2I(env->window->width - x, (env->window->height / 2) + (1 / hr.hit_dist * env->window->height / 2));
-		draw_wall(env->window, env->hd_textures[2], hr.offset, p1, p2);
+		draw_wall(env->window, env->hd_textures[hr.value + 1], hr.offset, p1, p2);
 		draw_floor(env->window, env->hd_textures, hr, p2, env->hero);
 	}
 	wfx_blit(env->window);
