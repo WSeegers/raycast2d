@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 21:31:18 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/19 22:09:33 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/21 08:38:06 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	draw_fps(t_env *env)
 		else if (hr.side == HIT_SOUTH)
 			colour = 0x00ffff00;
 		else if (hr.side == HIT_WEST)
-			colour = 0x00ffffff;
+			colour = 0x003d8e51;
 		p1 = VEC2I(env->window->width - x, (env->window->height / 2) - (1 / hr.hit_dist * env->window->height / 2));
 		p2 = VEC2I(env->window->width - x, (env->window->height / 2) + (1 / hr.hit_dist * env->window->height / 2));
 		wfx_line(env->window, VEC2I(env->window->width - x, 0), p1, 0x00cbd88f);
