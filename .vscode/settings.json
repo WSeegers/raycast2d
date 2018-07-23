@@ -5,6 +5,8 @@
 		"mlx.h": "c",
 		"limits": "cpp",
 		"stdio.h": "c",
-		"type_traits": "c"
+		"type_traits": "c",
+		"dda.h": "c",
+		"f_math.h": "c"
 	}
 }

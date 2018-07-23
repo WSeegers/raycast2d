@@ -6,15 +6,16 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:32:23 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 21:58:55 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/23 08:45:41 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
 #include "wolf3d.h"
-#include "draw_map.h"
 
 #define HERO_SSPD 0.1
+
+int 		fp_texture_loop(void *param);
 
 int	key_release(int key, void *p)
 {
@@ -58,6 +59,6 @@ int	key_press(int key, void *p)
 	else if (key == KEY_D)
 		env->hero->strafe -= HERO_SSPD;
 	else if (key == KEY_TAB)
-		wfx_loop_hook(env->window, draw_map, p);
+		wfx_loop_hook(env->window, fp_texture_loop, p);
 	return (0);
 }

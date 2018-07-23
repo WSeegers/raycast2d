@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:35:53 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 23:29:02 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/23 10:15:56 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define WIDTH (640)
 # define HEIGHT (400)
+# define VEIW_DISTANCE (5.0)
 
 # define MAX_TEXTURE (8)
 
@@ -36,7 +37,7 @@ typedef struct	s_env
 	t_image_set	hd_textures;
 }				t_env;
 
-int 	fp_basic(void *param);
+int 	fp_basic_loop(void *param);
 int		draw_map(void *parm);
 
 #endif
