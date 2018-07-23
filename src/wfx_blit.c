@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 19:47:41 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 22:43:10 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/23 15:34:27 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@ void		wfx_blit(t_window *window)
 {
 	//double frame_dif;
 	//struct timespec wait;
-	t_image *temp;
 
-
-	window->frame_count++;
-	f_swapptr((void**)&window->front, (void**)&window->back);
 	// frame_dif =  (double)(clock() - window->last_blit) / CLOCKS_PER_SEC;
 	// if (frame_dif < 1.0 / MAX_FPS)
 	// {
@@ -28,8 +24,6 @@ void		wfx_blit(t_window *window)
 	// 	wait.tv_nsec = (long)((1.0 / MAX_FPS - frame_dif) * 1000000000L);
 	// 	nanosleep(&wait, NULL);
 	// }
-
-
-	mlx_put_image_to_window(window->mlx, window->ptr, window->front->ptr, 0, 0);
-	window->last_blit = clock();
+	mlx_put_image_to_window(window->mlx, window->ptr, window->back->ptr, 0, 0);
+	//window->last_blit = clock();
 }

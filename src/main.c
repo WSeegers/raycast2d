@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/23 07:37:06 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/23 15:22:47 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,30 @@
 void	get_map(t_grid *map)
 {
 	char MAP[ROWS][COLS] = {
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,2,0,2,1,2,3,3,3,0,0,0,3,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-		{1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,2},
-		{1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,3},
-		{1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,3},
-		{1,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,4},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
-		{1,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,1,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,5,6,1,1,1,1,1}
+		{8,8,8,8,8,8,8,8,8,8,8,4,4,6,4,4,6,4,6,4,4,4,6,4},
+		{8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
+  		{8,0,3,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,6},
+  		{8,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6},
+  		{8,0,3,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
+  		{8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,6,6,6,0,6,4,6},
+  		{8,8,8,8,0,8,8,8,8,8,8,4,4,4,4,4,4,6,0,0,0,0,0,6},
+  		{7,7,7,7,0,7,7,7,7,0,8,0,8,0,8,0,8,4,0,4,0,6,0,6},
+  		{7,7,0,0,0,0,0,0,7,8,0,8,0,8,0,8,8,6,0,0,0,0,0,6},
+  		{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,0,0,0,0,0,4},
+  		{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,0,6,0,6,0,6},
+  		{7,7,0,0,0,0,0,0,7,8,0,8,0,8,0,8,8,6,4,6,0,6,6,6},
+  		{7,7,7,7,0,7,7,7,7,8,8,4,0,6,8,4,8,3,3,3,0,3,3,3},
+  		{2,2,2,2,0,2,2,2,2,4,6,4,0,0,6,0,6,3,0,0,0,0,0,3},
+  		{2,2,0,0,0,0,0,2,2,4,0,0,0,0,0,0,4,3,0,0,0,0,0,3},
+  		{2,0,0,0,0,0,0,0,2,4,0,0,0,0,0,0,4,3,0,0,0,0,0,3},
+  		{1,0,0,0,0,0,0,0,1,4,4,4,4,4,6,0,6,3,3,0,0,0,3,3},
+  		{2,0,0,0,0,0,0,0,2,2,2,1,2,2,2,6,6,0,0,5,0,5,0,5},
+  		{2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5},
+  		{2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5},
+  		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+  		{2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5},
+  		{2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5},
+  		{2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,5,5,5,5,5,5,5,5,5}
 	};
 
 	grid_init(map, COLS, ROWS);
@@ -76,6 +76,32 @@ int		splash_key(int key, void *p)
 	return (1);
 }
 
+static void	load_textures(t_env *env)
+{
+	env->wolf3d_textures[0] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/wolf3d/bluestone.xpm");
+	env->wolf3d_textures[1] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/wolf3d/wood.xpm");
+	env->wolf3d_textures[3] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/wolf3d/eagle.xpm");
+	env->wolf3d_textures[2] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/wolf3d/greystone.xpm");
+	env->wolf3d_textures[4] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/wolf3d/purplestone.xpm");
+	env->wolf3d_textures[5] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/wolf3d/redbrick.xpm");
+	env->wolf3d_textures[6] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/wolf3d/mossy.xpm");
+	env->wolf3d_textures[7] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/wolf3d/colorstone.xpm");
+	env->hd_textures[0] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/stone.xpm");
+	env->hd_textures[1] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/ceiling.xpm");
+	env->hd_textures[2] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/stone2.xpm");
+}
+
 int		main(void)
 {
 	t_env		env;
@@ -84,7 +110,7 @@ int		main(void)
 	t_state		splash;
 
 	wfx_init_window(&window, WIDTH, HEIGHT, "2d Raytest");
-	hero.pos = VEC2(4, 4);
+	hero.pos = VEC2(13, 9.5);
 	hero.velocity = 0;
 	hero.direction = vec2_norm(VEC2(-1, 0));
 	hero.rotation = 0;
@@ -95,38 +121,17 @@ int		main(void)
 	get_map(&env.map);
 
 	hero.plane = VEC2(0, 0.66);
-	
+
 	splash.key_down = splash_key;
 	splash.loop = draw_splash;
 
 	wfx_init_state(&env.game_state);
-	env.game_state.loop = fp_basic_loop;
+	env.game_state.loop = fp_wolf_loop;
 	env.game_state.key_down = key_press;
 	env.game_state.key_up = key_release;
 	env.game_state.mouse_move = NULL;
+	load_textures(&env);
 
-	int size;
-	int size2;
-	//void *pic = mlx_xpm_file_to_image(window.mlx, "assets/noise.xpm", &size, &size2);
-	
-	// env.hd_textures[0] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/bluestone.xpm");
-	// env.hd_textures[1] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/wood.xpm");
-	// env.hd_textures[3] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/eagle.xpm");
-	// env.hd_textures[2] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/greystone.xpm");
-	// env.hd_textures[4] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/purplestone.xpm");
-	// env.hd_textures[5] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/redbrick.xpm");
-	// env.hd_textures[6] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/mossy.xpm");
-	// env.hd_textures[7] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/wolf3d/colorstone.xpm");
-
-	env.hd_textures[0] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/stone.xpm");
-	env.hd_textures[1] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/ceiling.xpm");
-	env.hd_textures[2] = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/stone2.xpm");
-
-	// t_image	*pic = wfx_xpm_file_to_image(wfx_get_mlx(), "assets/noise.xpm");
-	// mlx_put_image_to_window(window.mlx, window.ptr, pic->ptr, 10, 10);
-	// t_image *pic_b = wfx_resize_image_nn(pic, VEC2I(200, 400));
-	// wfx_image_to_window(&window, pic, VEC2I(500, 10));
-	// wfx_image_to_window(&window, pic_b, VEC2I(10, 10));
 	wfx_blit(&window);
 	invoke_state(&window, &env.game_state, &env);
 	wfx_start(&window);

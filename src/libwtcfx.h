@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:47:21 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/23 09:47:10 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/23 15:25:36 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,11 @@ t_window	*wfx_create_window(void);
 void		wfx_init_window(t_window *window, int width, int height, char *title);
 void		wfx_destroy_window(t_window *window);
 void		wfx_blit(t_window *window);
-void		wfx_set_pixel(t_window *window, int x, int y, int col);
 void		wfx_clear_window(t_window *window);
 
 int			wfx_colour_brightness(int color, double scale);
 
+void		wfx_set_pixel(t_window *window, int x, int y, int col);
 void		wfx_line(t_window *window, t_vec2i p1, t_vec2i p2, int colour);
 void		wfx_rect(t_window *window, t_vec2i p1, t_vec2i p2, int colour, bool fill);
 void		wfx_circle(t_window *window, t_vec2i v, int radius, int colour);

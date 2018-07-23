@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 10:33:47 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 11:06:51 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/23 13:54:40 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,16 @@
 # define KEY_DOWN 125
 # define KEY_UP 126
 # define KEY_ESC 53
+
+# define KEY_1 18
+# define KEY_2 19
+# define KEY_3 20
+# define KEY_4 21
+# define KEY_5 22
+# define KEY_6 23
+# define KEY_7 24
+# define KEY_8 25
+# define KEY_9 26
 
 # define MOUSE_LEFT
 # define MOUSE_RIGHT

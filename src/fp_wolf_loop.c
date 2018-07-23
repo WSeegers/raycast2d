@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fp_texture_loop.c                                  :+:      :+:    :+:   */
+/*   fp_wolf_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/23 08:42:56 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/23 15:32:33 by wseegers         ###   ########.fr       */
+/*   Created: 2018/07/23 13:37:03 by wseegers          #+#    #+#             */
+/*   Updated: 2018/07/23 15:45:08 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,6 @@ static int	get_shaded_pixel(t_window *window, t_image *image,
 		return (0x0);
 }
 
-static void	draw_ceil_floor(t_env *env, t_hit_report hr, t_vec2i bot)
-{
-	t_vec2i	p[2];
-	t_vec2	current;
-	double	weight[2];
-	int		color[2];
-	t_image	*image[2];
-
-	while (++bot.y < POV_WIDTH)
-	{
-		weight[0] = POV_HEIGHT / (2.0 * bot.y - POV_HEIGHT);
-		weight[1] = weight[0] / hr.hit_dist;
-		current.x = weight[1] * hr.pos.x + (1.0 - weight[1]) * env->hero->pos.x;
-		current.y = weight[1] * hr.pos.y + (1.0 - weight[1]) * env->hero->pos.y;
-		image[0] = env->hd_textures[0];
-		p[0].x = (int)(current.x * image[0]->width) % image[0]->width;
-		p[0].y = (int)(current.y * image[0]->height) % image[0]->height;
-		image[1] = env->hd_textures[1];
-		p[1].x = (int)(current.x * image[1]->width) % image[1]->width;
-		p[1].y = (int)(current.y * image[1]->height) % image[1]->height;
-		weight[1] = 1 - (weight[0] / VEIW_DISTANCE);
-		color[0] = get_shaded_pixel(env->window, image[0], p[0], weight[1]);
-		color[1] = get_shaded_pixel(env->window, image[1], p[0], weight[1]);
-		set_pixel_pov(env->window, bot.x, bot.y, color[0]);
-		set_pixel_pov(env->window, bot.x,
-			POV_HEIGHT - bot.y, color[1]);
-	}
-}
-
 static void	draw_wall(t_env *env, t_hit_report hr, t_vec2i top, t_vec2i bot)
 {
 	t_vec2i	p;
@@ -66,7 +37,7 @@ static void	draw_wall(t_env *env, t_hit_report hr, t_vec2i top, t_vec2i bot)
 	t_image *image;
 	double	weight;
 
-	image = env->hd_textures[2];
+	image = env->wolf3d_textures[hr.value - 1];
 	weight = 1 - (hr.hit_dist / VEIW_DISTANCE);
 	p.x = (int)LERP(0.0, (double)image->width, hr.offset);
 	y = 0;
@@ -76,13 +47,14 @@ static void	draw_wall(t_env *env, t_hit_report hr, t_vec2i top, t_vec2i bot)
 	{
 		hr.offset = (double)y / (double)(bot.y - top.y);
 		p.y = (int)LERP(0.0, (double)image->height, hr.offset);
-		color = get_shaded_pixel(env->window, image, p, weight);
+		//color = get_shaded_pixel(env->window, image, p, weight);
+		color = GET_IMAGE_PIXEL(image, p.x, p.y);
 		set_pixel_pov(env->window, top.x, top.y + y, color);
 		y++;
 		if (top.y + y > POV_WIDTH)
 			return ;
 	}
-	set_pixel_pov(env->window, top.x, top.y + y, color);
+	wfx_set_pixel(env->window, top.x, top.y + y, color);
 }
 
 static void	draw_first_person(t_env *env)
@@ -107,12 +79,13 @@ static void	draw_first_person(t_env *env)
 			(POV_HEIGHT / 2) +
 				(1 / hr.hit_dist * POV_HEIGHT / 2));
 		draw_wall(env, hr, p1, p2);
-		draw_ceil_floor(env, hr, p2);
+		pov_line(env->window, VEC2I(POV_WIDTH - x, 0), p1, 0x00cbd88f);
+		pov_line(env->window, p2, VEC2I(POV_WIDTH - x, POV_HEIGHT - 1), 0x00546d6d);
 	}
 	wfx_blit(env->window);
 }
 
-int			fp_texture_loop(void *param)
+int			fp_wolf_loop(void *param)
 {
 	t_env			*env;
 

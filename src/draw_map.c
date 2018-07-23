@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 18:12:48 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 09:25:57 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/23 15:55:06 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_rays(t_window *window, t_hero *hero, t_grid map, double scale)
 	}
 }
 
-static void	draw_plane(t_window *window, t_hero *hero)
+void	draw_plane(t_window *window, t_hero *hero)
 {
 	t_vec2 p1;
 	t_vec2 p2;

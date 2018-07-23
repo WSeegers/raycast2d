@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:32:23 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/23 08:45:41 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/23 13:55:48 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ int	key_press(int key, void *p)
 		env->hero->strafe += HERO_SSPD;
 	else if (key == KEY_D)
 		env->hero->strafe -= HERO_SSPD;
+	else if (key == KEY_1)
+		wfx_loop_hook(env->window, fp_basic_loop, p);
+	else if (key == KEY_2)
+		wfx_loop_hook(env->window, fp_wolf_loop, p);
+	else if (key == KEY_3)
+		wfx_loop_hook(env->window, fp_texture_loop, p);
 	else if (key == KEY_TAB)
 		wfx_loop_hook(env->window, fp_texture_loop, p);
 	return (0);
