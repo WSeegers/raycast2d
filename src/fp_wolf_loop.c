@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 13:37:03 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/23 15:45:08 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/24 10:04:40 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	draw_wall(t_env *env, t_hit_report hr, t_vec2i top, t_vec2i bot)
 	t_image *image;
 	double	weight;
 
-	image = env->wolf3d_textures[hr.value - 1];
+	image = env->wolf3d_textures[hr.value % 8];
 	weight = 1 - (hr.hit_dist / VEIW_DISTANCE);
 	p.x = (int)LERP(0.0, (double)image->width, hr.offset);
 	y = 0;
@@ -82,7 +82,6 @@ static void	draw_first_person(t_env *env)
 		pov_line(env->window, VEC2I(POV_WIDTH - x, 0), p1, 0x00cbd88f);
 		pov_line(env->window, p2, VEC2I(POV_WIDTH - x, POV_HEIGHT - 1), 0x00546d6d);
 	}
-	wfx_blit(env->window);
 }
 
 int			fp_wolf_loop(void *param)
@@ -92,5 +91,7 @@ int			fp_wolf_loop(void *param)
 	env = (t_env*)param;
 	update_hero(env->hero, env->map);
 	draw_first_person(env);
+	draw_ui(env);
+	wfx_blit(env->window);
 	return (0);
 }

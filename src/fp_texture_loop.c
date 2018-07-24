@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 08:42:56 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/23 15:32:33 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/24 07:57:32 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ static void	draw_first_person(t_env *env)
 		draw_wall(env, hr, p1, p2);
 		draw_ceil_floor(env, hr, p2);
 	}
-	wfx_blit(env->window);
 }
 
 int			fp_texture_loop(void *param)
@@ -119,5 +118,7 @@ int			fp_texture_loop(void *param)
 	env = (t_env*)param;
 	update_hero(env->hero, env->map);
 	draw_first_person(env);
+	draw_ui(env);
+	wfx_blit(env->window);
 	return (0);
 }

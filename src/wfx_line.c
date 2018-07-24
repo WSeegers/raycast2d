@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 14:27:52 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 10:35:31 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/24 13:50:31 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,17 @@ void		wfx_line(t_window *window, t_vec2i p1, t_vec2i p2, int colour)
 	double	m;
 
 	if (clip(window, &p1, &p2))
-		return;
+		return ;
 	if (p1.x == p2.x && p1.y == p2.y)
 		wfx_set_pixel(window, p1.x, p1.y, colour);
-	m =	(double)(p2.y - p1.y) / (double)(p2.x - p1.x);
+	m = (double)(p2.y - p1.y) / (double)(p2.x - p1.x);
 	if (fabs(m) <= 1)
 	{
 		if (p1.x > p2.x)
 			draw_on_x(window, p2, p1, colour);
 		draw_on_x(window, p1, p2, colour);
 	}
-	else  
+	else
 	{
 		if (p1.y > p2.y)
 			draw_on_y(window, p2, p1, colour);

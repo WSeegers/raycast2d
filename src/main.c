@@ -6,74 +6,79 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/23 15:22:47 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/24 10:28:57 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include "draw_map.h"
+#include "f_io.h"
 
-#define CELL 50
-
-#define ROWS 24
-#define COLS 24
-
-
-void	get_map(t_grid *map)
+void	validate_map(t_grid *map)
 {
-	char MAP[ROWS][COLS] = {
-		{8,8,8,8,8,8,8,8,8,8,8,4,4,6,4,4,6,4,6,4,4,4,6,4},
-		{8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
-  		{8,0,3,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,6},
-  		{8,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6},
-  		{8,0,3,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
-  		{8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,6,6,6,0,6,4,6},
-  		{8,8,8,8,0,8,8,8,8,8,8,4,4,4,4,4,4,6,0,0,0,0,0,6},
-  		{7,7,7,7,0,7,7,7,7,0,8,0,8,0,8,0,8,4,0,4,0,6,0,6},
-  		{7,7,0,0,0,0,0,0,7,8,0,8,0,8,0,8,8,6,0,0,0,0,0,6},
-  		{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,0,0,0,0,0,4},
-  		{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,0,6,0,6,0,6},
-  		{7,7,0,0,0,0,0,0,7,8,0,8,0,8,0,8,8,6,4,6,0,6,6,6},
-  		{7,7,7,7,0,7,7,7,7,8,8,4,0,6,8,4,8,3,3,3,0,3,3,3},
-  		{2,2,2,2,0,2,2,2,2,4,6,4,0,0,6,0,6,3,0,0,0,0,0,3},
-  		{2,2,0,0,0,0,0,2,2,4,0,0,0,0,0,0,4,3,0,0,0,0,0,3},
-  		{2,0,0,0,0,0,0,0,2,4,0,0,0,0,0,0,4,3,0,0,0,0,0,3},
-  		{1,0,0,0,0,0,0,0,1,4,4,4,4,4,6,0,6,3,3,0,0,0,3,3},
-  		{2,0,0,0,0,0,0,0,2,2,2,1,2,2,2,6,6,0,0,5,0,5,0,5},
-  		{2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5},
-  		{2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5},
-  		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-  		{2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5},
-  		{2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5},
-  		{2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,5,5,5,5,5,5,5,5,5}
-	};
+	t_vec2i	pos;
 
-	grid_init(map, COLS, ROWS);
-	for (int y = 0; y < ROWS; y++)
-		for (int x = 0; x < COLS; x++)
-			grid_set(map, CLAMP(MAP[y][x], 0, 6), x, y);
+	pos = VEC2I(-1, -1);
+	while (pos.y++ < map->height && (pos.x = -1))
+		while (pos.x++ < map->width)
+		{
+			if ((!pos.y || !pos.x || pos.x == map->width - 1 ||
+				pos.y == map->height - 1) &&
+				!GRID_GET((*map), pos.x, pos.y))
+				grid_set(map, 1, pos.x, pos.y);
+		}
 }
 
-int		draw_splash(void *p)
+void	parse_map(t_grid *map, t_hero *hero, t_file *m_file)
 {
-	t_env	*env;
+	char	*line;
+	char	*line_ptr;
+	t_vec2i	pos;
 
-	env = (t_env*)p;
-	for (int y = 0; y < env->window->height; y++)
-		for (int x = 0; x < env->window->width; x++)
-	 		wfx_set_pixel(env->window, x, y, x * y + y + x);
-	//wfx_blit(env->window);
-	return (1);
+	pos = VEC2I(0, 0);
+	while (f_next_line(&line, m_file))
+	{
+		pos.x = 0;
+		line_ptr = line;
+		while (*line)
+		{
+			if (*line == 'x' && line[1] == ' ')
+			{
+				hero->pos = VEC2(pos.x + 0.5, pos.y + 0.5);
+				grid_set(map, 0, pos.x++, pos.y);
+			}
+			else if (!f_isdigit(line[0]) || !((line[1] == ' ') || !line[1]))
+				f_eexit(0,
+			"Map must be single digits only followed by space");
+			else
+				grid_set(map, f_atoi(line), pos.x++, pos.y);
+			line += 2;
+		}
+		pos.y++;
+	}
 }
 
-int		splash_key(int key, void *p)
+void	get_map(t_grid *map, t_hero *hero)
 {
-	t_env	*env;
+	t_file	*m_file;
+	char	*line;
+	t_vec2i	t;
 
-	(void)key;
-	env = (t_env*)p;
-	invoke_state(env->window, &env->game_state, env);
-	return (1);
+	if (!(m_file = f_openf("assets/map.w3d", 'r')))
+		f_eexit(0, "Fail opening map file");
+	t = VEC2I(0, 0);
+	if (!f_next_line(&line, m_file))
+		f_eexit(0, "Empty map");
+	t.x = f_atoi(line);
+	t.y = f_atoi(f_strchr(line, ' '));
+	if (t.x < 3 || t.y < 3)
+		f_eexit(0, "invalid map size");
+	grid_init(map, t.x, t.y);
+	f_strdel(&line);
+	parse_map(map, hero, m_file);
+	if (!hero->pos.x || !hero->pos.y)
+		f_eexit(0, "no hero spawn");
+	validate_map(map);
 }
 
 static void	load_textures(t_env *env)
@@ -95,11 +100,13 @@ static void	load_textures(t_env *env)
 	env->wolf3d_textures[7] = wfx_xpm_file_to_image(wfx_get_mlx(),
 		"assets/wolf3d/colorstone.xpm");
 	env->hd_textures[0] = wfx_xpm_file_to_image(wfx_get_mlx(),
-		"assets/stone.xpm");
+		"assets/hd_texture/stone.xpm");
 	env->hd_textures[1] = wfx_xpm_file_to_image(wfx_get_mlx(),
-		"assets/ceiling.xpm");
+		"assets/hd_texture/ceiling.xpm");
 	env->hd_textures[2] = wfx_xpm_file_to_image(wfx_get_mlx(),
-		"assets/stone2.xpm");
+		"assets/hd_texture/stone2.xpm");
+	env->ui[0] = wfx_xpm_file_to_image(wfx_get_mlx(),
+		"assets/ui-background.xpm");
 }
 
 int		main(void)
@@ -110,23 +117,19 @@ int		main(void)
 	t_state		splash;
 
 	wfx_init_window(&window, WIDTH, HEIGHT, "2d Raytest");
-	hero.pos = VEC2(13, 9.5);
+	hero.pos = VEC2(0, 0);
 	hero.velocity = 0;
 	hero.direction = vec2_norm(VEC2(-1, 0));
 	hero.rotation = 0;
 	hero.strafe = 0;
+	hero.plane = VEC2(0, 0.66);
 
 	env.window = &window;
 	env.hero = &hero;
-	get_map(&env.map);
-
-	hero.plane = VEC2(0, 0.66);
-
-	splash.key_down = splash_key;
-	splash.loop = draw_splash;
+	get_map(&env.map, env.hero);
 
 	wfx_init_state(&env.game_state);
-	env.game_state.loop = fp_wolf_loop;
+	env.game_state.loop = fp_basic_loop;
 	env.game_state.key_down = key_press;
 	env.game_state.key_up = key_release;
 	env.game_state.mouse_move = NULL;

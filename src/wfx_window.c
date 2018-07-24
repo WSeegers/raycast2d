@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 19:04:09 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/21 22:26:09 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/24 14:12:38 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_window	*wfx_create_window(void)
 	return (f_memalloc(sizeof(t_window)));
 }
 
-void		wfx_init_window(t_window *window, int width, int height, char *title)
+void		wfx_init_window(t_window *window, int width, int height,
+				char *title)
 {
 	if (!title)
 		title = "No Title";
@@ -36,16 +37,6 @@ void		wfx_init_window(t_window *window, int width, int height, char *title)
 	window->resy = 0;
 }
 
-void		wfx_set_resolution(t_window *window, int newx, int newy)
-{
-	if (newx >= window->width || newy >= window->height)
-		f_eexit(0, "Check res size, it must be less than the initialised window");
-	window->resx = window->width;
-	window->resy = window->height;
-	window->width = newx;
-	window->height = newy;
-}
-
 void		wfx_destroy_window(t_window *window)
 {
 	if (!window)
@@ -57,7 +48,7 @@ void		wfx_destroy_window(t_window *window)
 	mlx_destroy_window(wfx_create_window(), window->ptr);
 }
 
-void	wfx_image_to_window(t_window *window, t_image *image, t_vec2i pos)
+void		wfx_image_to_window(t_window *window, t_image *image, t_vec2i pos)
 {
 	wfx_image_to_image(window->back, image, pos);
 }

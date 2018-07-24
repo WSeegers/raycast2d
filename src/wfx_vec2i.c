@@ -6,13 +6,13 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 21:29:19 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/16 11:54:07 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/24 14:09:59 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
 
-t_vec2i		*vec2i_create()
+t_vec2i		*vec2i_create(void)
 {
 	return (f_memalloc(sizeof(t_vec2i)));
 }

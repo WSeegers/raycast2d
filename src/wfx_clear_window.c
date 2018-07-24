@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   wfx_clear_window.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 21:34:40 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/15 22:21:13 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/24 14:09:42 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libwtcfx.h"
 
-void		wfx_clear_window(t_window *window)
+void	wfx_clear_window(t_window *window)
 {
 	int height;
 	int width;
 	int y;
 	int x;
-	
+
 	height = window->height;
 	width = window->width;
-
 	y = -1;
 	while (++y < height && (x = -1))
 		while (++x < width)
