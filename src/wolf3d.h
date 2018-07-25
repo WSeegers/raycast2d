@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:35:53 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/25 11:55:59 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 14:49:05 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void			set_pixel_pov(t_window *window, int x, int y, int col);
 void			pov_line(t_window *window, t_vec2i p1, t_vec2i p2, int colour);
 void			draw_ui(t_env *env);
 void			get_map(t_grid *map, t_hero *hero);
+int				close_hook(void *p);
 
 #endif

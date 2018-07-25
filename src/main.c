@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/25 14:27:49 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 14:52:55 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int			main(void)
 	wfx_init_window(&window, WIDTH, HEIGHT, "2d Raytest");
 	env.window = &window;
 	env.hero = &hero;
+	wfx_exit_hook(env.window, close_hook, &env);
 	get_map(&env.map, env.hero);
 	load_textures(&env, window.mlx);
 	wfx_blit(&window);

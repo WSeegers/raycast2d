@@ -6,11 +6,18 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:32:23 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/25 10:27:48 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 14:52:05 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+int	close_hook(void *p)
+{
+	(void)p;
+	f_exit(0);
+	return (0);
+}
 
 int	key_release(int key, void *p)
 {
