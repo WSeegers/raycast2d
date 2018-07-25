@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:35:53 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/25 10:04:32 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 11:55:59 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct	s_env
 	t_state		game_state;
 	t_image		*wolf3d_textures[8];
 	t_image		*hd_textures[3];
-	t_image		*ui[1];
 }				t_env;
 
 int				fp_basic_loop(void *param);
@@ -50,5 +49,6 @@ int				fp_texture_loop(void *param);
 void			set_pixel_pov(t_window *window, int x, int y, int col);
 void			pov_line(t_window *window, t_vec2i p1, t_vec2i p2, int colour);
 void			draw_ui(t_env *env);
+void			get_map(t_grid *map, t_hero *hero);
 
 #endif

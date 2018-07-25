@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:32:23 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/25 08:21:29 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 10:27:48 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int	key_release(int key, void *p)
 {
-	t_env	*env = (t_env*)p;
+	t_env	*env;
 
-	if (key == KEY_LEFT)
+	env = (t_env*)p;
+	if (key == 53)
+		exit(0);
+	else if (key == KEY_LEFT)
 		env->hero->rotation += HERO_ROT;
 	else if (key == KEY_W)
 		env->hero->velocity -= HERO_SPD;
@@ -35,11 +38,10 @@ int	key_release(int key, void *p)
 
 int	key_press(int key, void *p)
 {
-	t_env	*env = (t_env*)p;
+	t_env	*env;
 
-	if (key == 53)
-		exit(0);
-	else if (key == KEY_LEFT)
+	env = (t_env*)p;
+	if (key == KEY_LEFT)
 		env->hero->rotation -= HERO_ROT;
 	else if (key == KEY_W)
 		env->hero->velocity += HERO_SPD;

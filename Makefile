@@ -6,11 +6,11 @@
 #    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/13 17:45:03 by dotmauws          #+#    #+#              #
-#    Updated: 2018/07/25 09:54:42 by wseegers         ###   ########.fr        #
+#    Updated: 2018/07/25 14:29:23 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ray2d
+NAME = wolf3d
 CC = clang
 #CFLAGS = -Werror -Wall -Wextra 
 CFLAGS =

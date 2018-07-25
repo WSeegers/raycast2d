@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 13:37:03 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/25 08:21:18 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 10:19:30 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static void	draw_first_person(t_env *env)
 				(1 / hr.hit_dist * POV_HEIGHT / 2));
 		draw_wall(env, hr, p1, p2);
 		pov_line(env->window, VEC2I(POV_WIDTH - x, 0), p1, 0x00cbd88f);
-		pov_line(env->window, p2, VEC2I(POV_WIDTH - x, POV_HEIGHT - 1), 0x00546d6d);
+		pov_line(env->window, p2, VEC2I(POV_WIDTH - x,
+			POV_HEIGHT - 1), 0x00546d6d);
 	}
 }
 

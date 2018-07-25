@@ -22,6 +22,7 @@
 		"chrono": "c",
 		"algorithm": "c",
 		"f_cntl.h": "c",
-		"s_grid.h": "c"
+		"s_grid.h": "c",
+		"locale": "c"
 	}
 }

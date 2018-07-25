@@ -1,3 +1,5 @@
 .vscode/*
 bin/*.d
 ray2d
+.nfs.*
+wolf3d
