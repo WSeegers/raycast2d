@@ -6,11 +6,10 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 21:31:18 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/24 14:13:01 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 08:20:10 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libwtcfx.h"
 #include "wolf3d.h"
 #include "dda.h"
 

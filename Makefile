@@ -6,7 +6,7 @@
 #    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/13 17:45:03 by dotmauws          #+#    #+#              #
-#    Updated: 2018/07/20 10:01:37 by wseegers         ###   ########.fr        #
+#    Updated: 2018/07/25 09:54:42 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = ray2d
 CC = clang
 #CFLAGS = -Werror -Wall -Wextra 
 CFLAGS =
-INC = -I toolkit-wtc/include -I include
-LIB = toolkit-wtc/toolkit-wtc.a
+INC = -I toolkit-wtc/include
+LIB = -Ltoolkit-wtc -lwtcc -lwtcfx
 
 SRC_PATH = src
 ALL_SRC = $(wildcard src/*.c)
@@ -37,8 +37,8 @@ all : make_LIB $(NAME)
 make_LIB :
 	make -C toolkit-wtc
 
-$(NAME) : $(BIN) $(LIB)
-	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LFLAGS)
+$(NAME) : $(BIN)
+	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LFLAGS) $(LIB)
 
 $(BIN_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(BIN_PATH)

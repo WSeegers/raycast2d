@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 08:35:53 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/24 14:12:46 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 10:04:32 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 # include <stdlib.h>
 # include "libwtcfx.h"
+# include "f_memory.h"
+# include "f_math.h"
+# include "f_string.h"
+# include "f_io.h"
 # include "hero.h"
-# include "wfx_mac_keys.h"
-# include "s_vector.h"
 
 # define WIDTH (800)
 # define HEIGHT (600)

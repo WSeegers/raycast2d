@@ -39,7 +39,7 @@ typedef struct	s_dda
 	t_vec2i hity;
 	t_vec2i	step;
 	int		yhit;
-	double 	hitdist;
+	double	hitdist;
 }				t_dda;
 
 t_hit_report	dda(t_vec2 start, t_vec2 direction, t_grid map);

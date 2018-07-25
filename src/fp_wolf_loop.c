@@ -6,14 +6,12 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 13:37:03 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/24 10:04:40 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 08:21:18 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libwtcfx.h"
 #include "wolf3d.h"
 #include "dda.h"
-#include "f_math.h"
 
 static int	get_shaded_pixel(t_window *window, t_image *image,
 													t_vec2i p, double weight)
@@ -47,7 +45,6 @@ static void	draw_wall(t_env *env, t_hit_report hr, t_vec2i top, t_vec2i bot)
 	{
 		hr.offset = (double)y / (double)(bot.y - top.y);
 		p.y = (int)LERP(0.0, (double)image->height, hr.offset);
-		//color = get_shaded_pixel(env->window, image, p, weight);
 		color = GET_IMAGE_PIXEL(image, p.x, p.y);
 		set_pixel_pov(env->window, top.x, top.y + y, color);
 		y++;

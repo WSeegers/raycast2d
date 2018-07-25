@@ -20,6 +20,8 @@
 		"__mutex_base": "c",
 		"__bit_reference": "c",
 		"chrono": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"f_cntl.h": "c",
+		"s_grid.h": "c"
 	}
 }

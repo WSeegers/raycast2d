@@ -6,11 +6,10 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 12:36:11 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/24 14:08:49 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 08:19:46 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libwtcfx.h"
 #include "hero.h"
 
 void		rotate_hero(t_hero *hero, double rad)

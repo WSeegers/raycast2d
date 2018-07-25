@@ -6,14 +6,12 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 08:42:56 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/24 07:57:32 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 08:21:11 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libwtcfx.h"
 #include "wolf3d.h"
 #include "dda.h"
-#include "f_math.h"
 
 static int	get_shaded_pixel(t_window *window, t_image *image,
 													t_vec2i p, double weight)

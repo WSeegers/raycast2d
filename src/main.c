@@ -6,13 +6,12 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 18:48:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/24 10:28:57 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/25 08:23:12 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include "draw_map.h"
-#include "f_io.h"
 
 void	validate_map(t_grid *map)
 {
